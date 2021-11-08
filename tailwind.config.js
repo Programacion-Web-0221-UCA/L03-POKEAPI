@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       'roboto': ['Roboto', 'sans-serif'],
+      'oswald': ['Oswald', 'san-serif']
     },
     minHeight: {
       'fullscreen': '100vh'
