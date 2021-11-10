@@ -1,6 +1,6 @@
 import Card from "../Card/Card";
 
-//Componente para renderizar una card por cada pokemon en el arreglo
+// Componente para renderizar una card por cada pokemon en el arreglo
 const Pokedex = ({ pokemons = [] }) => {
     return (
         <div>
