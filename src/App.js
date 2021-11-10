@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
 import pokemonServices from "./Services/Pokedex/Pokedex.service";
 
-import Pokedex from "./Components/Pokedex/Pokedex"
+import Pokedex from "./Components/Pokedex/Pokedex";
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
@@ -12,25 +12,28 @@ function App() {
     const fetchPokemons = async () => {
       try {
         //Aquí obtenemos los pokemons que devuelve la API ya transformados
-        const response = await pokemonServices(5, 0)
-        setPokemons(response)
+        const response = await pokemonServices(5, 0);
+        setPokemons(response);
       }
-      catch(error) {
-        console.error(error)
+      catch (error) {
+        console.error(error);
       }
     }
 
-    fetchPokemons()
+    fetchPokemons();
   }, [])
 
-  //fetchPokemons()
-    return (
-      <div className="bg-gray-100">
-        <header className="flex justify-center items-center w-full ">
-          <h1>Pokedex National</h1>
+  return (
+    // Recordar que min-h-fullscreen es un valor personalizado en tailwind.config.js
+    <div className="flex flex-col w-full min-h-fullscreen bg-gray-200">
+        {/* sticky, top-0 y left-0 se colocan para que el header quede "pegado" a la parte de arriba al hacer scroll */}
+        <header className="flex justify-center items-center w-full h-16 sticky top-0 left-0 bg-gray-300 z-10">
+            <h1 className="text-black font-oswald">Pokedex National</h1>
         </header>
-        <Pokedex pokemons={pokemons}/>   
-      </div>
+        <main className="flex flex-col justify-center p-8 gap-8">
+            <Pokedex pokemons={pokemons} />
+        </main>
+    </div>
   );
 }
 

@@ -1,5 +1,6 @@
-import Card from "../Card/Card"
+import Card from "../Card/Card";
 
+//Componente para renderizar una card por cada pokemon en el arreglo
 const Pokedex = ({ pokemons = [] }) => {
     return (
         <div>
@@ -13,4 +14,4 @@ const Pokedex = ({ pokemons = [] }) => {
     )
 }
 
-export default Pokedex
+export default Pokedex;

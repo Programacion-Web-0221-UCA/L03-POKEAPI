@@ -5,4 +5,4 @@ const Chip = ({ item = "" }) => {
     )
 }
 
-export default Chip
+export default Chip;

@@ -1,35 +1,38 @@
 const BASE_URL = "https://pokeapi.co/api/v2/";
 
+//Retorna un arreglo de urls correspondientes a cada pokemon
 const fetchAllPokemons = async (limit, offset) => {
     const response = await fetch(`${BASE_URL}pokemon?limit=${ limit }&offset=${ offset }`);
     const pokemonsResponse = await response.json();
 
     const pokemonsUrl = pokemonsResponse.results.map(
         pokemon => pokemon.url
-    )
+    );
 
-    return pokemonsUrl
+    return pokemonsUrl;
 }
 
+//Retorna un arreglo de pokemons (con todos sus datos)
 const fetchUrlPokemons = async (pokemonsUrl) => {
     //Arreglo de promesas
     const pokemonsPromises = pokemonsUrl.map(
         url => fetch(url)
-    )
+    );
 
     const results = await Promise.all(pokemonsPromises);
 
     const resultsJSON = results.map(
         result => result.json()
-    )
+    );
 
-    const pokemons = await Promise.all(resultsJSON)
+    const pokemons = await Promise.all(resultsJSON);
 
-    return pokemons
+    return pokemons;
 }
 
+//Se transforman los objetos pokemons para que solo contengan la información que necesitamos en nuestra app
 const transformPokemonData = (pokemonData) => {
-    if(!pokemonData) return null
+    if(!pokemonData) return null;
 
     return {
         id: pokemonData.id,
@@ -41,24 +44,24 @@ const transformPokemonData = (pokemonData) => {
         types: pokemonData.types.map(
             type => type.type.name
         )
-    }
+    };
 }
 
 const pokemonServices = async (limit, offset) => {
     try {
-        const urls = await fetchAllPokemons(limit, offset)
-        const pokemons = await fetchUrlPokemons(urls)
+        const urls = await fetchAllPokemons(limit, offset);
+        const pokemons = await fetchUrlPokemons(urls);
     
         const mappedPokemons = pokemons.map(
             pokemon => transformPokemonData(pokemon)
-        )
+        );
 
-        return mappedPokemons
+        return mappedPokemons;
     }
     catch(error) {
-        console.error(error)
-        return []
+        console.error(error);
+        return [];
     }
 }
 
-export default pokemonServices
+export default pokemonServices;

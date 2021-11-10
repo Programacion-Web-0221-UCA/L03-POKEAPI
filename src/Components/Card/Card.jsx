@@ -1,10 +1,10 @@
-import Group from "./Group/Group"
-import pokebola from "../../Assets/Img/pokemon.png"
-import { IoAdd } from "react-icons/all"
+import Group from "./Group/Group";
+import pokebola from "../../Assets/Img/pokemon.png";
+import { IoAdd } from "react-icons/all";
 
 const Card = ({ pokemon }) => {
     //Si la imagen del pokemon es nula o indefinida, se muestra por defecto una imagen de pokebola
-    const src = pokemon.thumbnail ?? pokebola
+    const src = pokemon.thumbnail ?? pokebola;
 
     return (
         <div>
@@ -27,4 +27,4 @@ const Card = ({ pokemon }) => {
     )
 }
 
-export default Card
+export default Card;
