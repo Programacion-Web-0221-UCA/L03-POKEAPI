@@ -12,7 +12,7 @@ function App() {
     const fetchPokemons = async () => {
       try {
         //Aquí obtenemos los pokemons que devuelve la API ya transformados
-        const response = await pokemonServices(5, 0);
+        const response = await pokemonServices(25, 0);
         setPokemons(response);
       }
       catch (error) {
