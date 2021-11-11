@@ -1,13 +1,13 @@
 import Card from "../Card/Card";
 
 // Componente para renderizar una card por cada pokemon en el arreglo
-const Pokedex = ({ pokemons = [] }) => {
+const Pokedex = ({ pokemons = [], onAddToParty = () => {} } ) => {
     return (
         <div className="flex justify-center items-center flex-wrap w-full gap-4">
             {
             pokemons.map(
                 pokemon =>  {
-                    return <Card key={pokemon.id} pokemon={pokemon} />
+                    return <Card key={pokemon.id} onAdd={() => {onAddToParty(pokemon.id)}} pokemon={pokemon} />
                 })
             }
         </div>

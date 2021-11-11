@@ -47,20 +47,44 @@ const transformPokemonData = (pokemonData) => {
     };
 }
 
-const pokemonServices = async (limit, offset) => {
-    try {
-        const urls = await fetchAllPokemons(limit, offset);
-        const pokemons = await fetchUrlPokemons(urls);
+const pokemonServices = {
+    getAllPokemons: async (limit, offset) => {
+        try {
+            const urls = await fetchAllPokemons(limit, offset);
+            const pokemons = await fetchUrlPokemons(urls);
+        
+            const mappedPokemons = pokemons.map(
+                pokemon => transformPokemonData(pokemon)
+            );
     
-        const mappedPokemons = pokemons.map(
-            pokemon => transformPokemonData(pokemon)
-        );
+            return mappedPokemons;
+        }
+        catch(error) {
+            console.error(error);
+            return [];
+        }
+    },
+    getPokemon: async (name = "") => {
+        try {
+            const response = await fetch(`${BASE_URL}pokemon/${name}`)
+            const data = await response.json();
 
-        return mappedPokemons;
-    }
-    catch(error) {
-        console.error(error);
-        return [];
+            if(!data) throw new Error('Pokemon not found');
+
+            const transformPokemon = transformPokemonData(data);
+
+            return {
+                success: true,
+                pokemon: transformPokemon
+            }
+        }
+        catch (error){
+            console.error({error});
+            return {
+                success: false,
+                pokemon: null
+            }
+        }
     }
 }
 
